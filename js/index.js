@@ -2,6 +2,11 @@
 
  $(document).ready(function(){
 
+    if(window.localStorage.getItem("txtToSave") != null)
+      $("#txtToSave").val(window.localStorage.getItem("txtToSave"));
+
+
+
         function onSuccess(acceleration) {
 
           var newX = Math.floor((acceleration.x+10)*255/20);
@@ -16,7 +21,7 @@
         }
 
         setTimeout(function(){
-          navigator.accelerometer.watchAcceleration(onSuccess, onError,{frequency:500});
+          //navigator.accelerometer.watchAcceleration(onSuccess, onError,{frequency:500});
         },4000)
 
 
@@ -87,6 +92,17 @@
 
 
 
+        })
+
+
+
+        $("#btnSaveTxt").on("click",function(){
+          window.localStorage.setItem("txtToSave",$("#txtToSave").val())
+        })
+
+         $("#btnClearTxt").on("click",function(){
+          window.localStorage.removeItem("txtToSave")
+          $("#txtToSave").val("");
         })
 
   });
