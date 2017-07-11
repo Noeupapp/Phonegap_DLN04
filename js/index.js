@@ -35,4 +35,29 @@
 
         })
 
+
+
+
+
+
+
+        $("#getPhoto").on("click",function(){
+          function onSuccessPhoto(imageData) {
+                var image = document.getElementById('resultPhoto');
+                image.src = "data:image/jpeg;base64," + imageData;
+                image.style.display = "block";
+            }
+
+            function onFailPhoto(message) {
+                alert('Failed because: ' + message);
+            }
+            navigator.camera.getPicture(onSuccessPhoto, onFailPhoto, {
+                quality: 50,
+                correctOrientation:true,
+                destinationType: Camera.DestinationType.DATA_URL
+            });
+
+
+        })
+
   });
