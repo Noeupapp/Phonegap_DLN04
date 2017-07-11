@@ -1,3 +1,5 @@
+ var map;
+
  $(document).ready(function(){
 
         function onSuccess(acceleration) {
@@ -56,6 +58,33 @@
                 correctOrientation:true,
                 destinationType: Camera.DestinationType.DATA_URL
             });
+
+
+        })
+
+        $("#showMap").on("click",function(){
+          var nantes = {lat: 47.218371, lng: -1.553621};
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            center: nantes
+          });
+
+          var onSuccess = function(position) {
+           var marker = new google.maps.Marker({
+            position: {lat: position.coords.latitude, lng: position.coords.longitude},
+            map: map
+          });
+        };
+
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
 
 
         })
